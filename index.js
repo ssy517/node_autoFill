@@ -14,9 +14,10 @@ const puppeteer = require('puppeteer');
         page
         .waitForSelector('#theme_time_data', {visible : true}) //해당 태그의 콘텐츠가 로드될 때까지 대기
         //.then(() => console.log('got it'));
-        await page.evaluate(() => { //선택 가능한 태그 구분 가능?
-          fun_theme_time_select('1470','0');
-          fun_submit();
+        await page.evaluate(() => {
+            await page.click('.possible li:first-child'); // 첫번째
+            //fun_theme_time_select('1470','0');
+            fun_submit();
         }); 
         await page.waitForNavigation({waitUntil: 'networkidle0'}); //Waits for the page to navigate to a new URL or to reload networkidle2 ?
         page.click('[name="ck_agree"]');
